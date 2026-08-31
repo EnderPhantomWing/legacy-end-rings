@@ -24,7 +24,7 @@
 	],
 	"depends": {
 		"fabricloader": "*",
-		"minecraft": "26.3-alpha.8",
+		"minecraft": "${minecraft_dependency}",
 		"java": ">=25"
 	}
 }
