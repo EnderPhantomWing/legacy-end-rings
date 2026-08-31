@@ -8,11 +8,12 @@ plugins {
 
 def getModVersion = { ->
 	version = project.mod_version
+	minecraft_version = project.minecraft_version
 	Provider<String> output = providers.exec {
 		commandLine('git', 'rev-list', '--count', 'HEAD')
 	}.standardOutput.asText
 
-	return version + "." + output.get().trim().toString()
+	return version + "." + output.get().trim().toString() + "-mc" + minecraft_version
 }
 
 version = getModVersion()
@@ -58,15 +59,6 @@ tasks.withType(JavaCompile).configureEach {
 	it.options.release = 25
 }
 
-afterEvaluate {
-	jar {
-		archiveFileName = "${project.name}-$version-mc${project.minecraft_version}-fabric.jar"
-	}
-
-	sourcesJar {
-		archiveFileName = "${project.name}-$version-mc${project.minecraft_version}-sources-fabric.jar"
-	}
-}
 java {
 	withSourcesJar()
 
