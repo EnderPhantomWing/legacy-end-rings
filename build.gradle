@@ -48,8 +48,15 @@ dependencies {
 
 processResources {
 	filesMatching("fabric.mod.json") {
-
+		expand([
+				"version": getModVersion(),
+				"minecraft_dependency": project.minecraft_dependency
+		])
 	}
+}
+
+base {
+	archivesName = project.name + "-" + getVersion()
 }
 
 tasks.withType(JavaCompile).configureEach {
